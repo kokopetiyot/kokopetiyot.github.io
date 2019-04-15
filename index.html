@@ -17,13 +17,51 @@
       frameRate(30);
         
       // Paste JS code here:
-     var currentScene;
-
+     var currentScene = 1;
+var color1=376;
+var color2= 19;
+var color3 = 430;
+var recX;
+var recY;
+var recX = 0;
+var recY = 300;
+var recX2 = -100;
+var recY2 = 222;
+background(94, 72, 153);
+draw = function() {
+    
 var drawScene1 =function(){
     currentScene = 1;
-	getImage("asset/Nos.png");
-    image("Nos.png",115,60,82,29);
-    background(86, 66, 140);
+    fill(66, 57, 92);
+    rect(0,32,404,101);
+    textFont(createFont("monospace"));
+    fill(204, 191, 242);
+    textSize(30);
+    text("Click to Start",79,82);
+    noStroke();
+    fill(93, 107, 232);
+    rect(-21,331,20,20);
+    if(currentScene === 1){
+    color1 += 1/16;
+    color2 +=1/200;
+    color3 +=1/116;
+    recX+=5;
+    recX2+=5;
+    }
+    
+    if(recX>400){
+     recY = random(200,400);
+     recX = -20;
+    }
+    if(recX2>400){
+     recY2 = random (150,410);
+     recX2 = -20;
+    }
+    
+    fill(100 * sin(color1)+100, 100 * sin(color2)+100, 100 * sin(color3)+100);
+    rect(-16+recX,recY,20,20);
+    rect(-5+recX2,recY2,20,20);
+    
 };
 
 var drawScene2 =function(){
@@ -32,15 +70,17 @@ var drawScene2 =function(){
     text("Leafersd",200,50);
 };
 
+if(currentScene === 1){
 drawScene1();
+}
 
 mouseClicked=function(){
     if(currentScene === 1){
-        drawScene2();   
+        drawScene2();
+        currentScene = 2;
     }
 };
-    }};
-
+};
   // Get the canvas that ProcessingJS will use
   var canvas = document.getElementById("mycanvas"); 
   // Pass the function to ProcessingJS constructor
