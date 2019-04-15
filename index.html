@@ -19,7 +19,7 @@
         
       // Paste code from Khan Academy here:
       var currentScene = 1;
-var color1=46;
+var color1=47;
 var color2= 456;
 var color3 = 231;
 var recX;
@@ -38,7 +38,9 @@ var drawScene1 =function(){
     textFont(createFont("monospace"));
     fill(204, 191, 242);
     textSize(30);
-    text("Click to Start",79,82);
+    text("Color Ball",97,90);
+    textSize(20);
+    text("Click anywhere to start",60,121)
     noStroke();
     fill(93, 107, 232);
     rect(-21,331,20,20);
@@ -67,8 +69,68 @@ var drawScene1 =function(){
 
 var drawScene2 =function(){
     currentScene = 1;
-    background(200, 175, 175);
-    text("Leafersd",200,50);
+    var ballX = 200;
+var ballY = 200;
+var velX = 1/4;
+var velY = -2;
+var rectW = 0;
+var color1 = random(0,200);
+var color2 = random(0,200);
+var color3 = random(0,200);
+background(92, 92, 92);
+var score=0;
+var xRand=random(0,4);
+var xAdd=xRand/6;
+var xNeg=-1;
+
+draw = function() {
+        
+        //color change
+        color1 += 1/3;
+        color2 +=1/53;
+        color3 +=1/151;
+    //the ball
+    noStroke();
+    fill(100 * sin(color1)+100, 100 * sin(color2)+100, 100 * sin(color3)+100);
+    ellipse(ballX,ballY,20,20);
+    
+    //the paddle
+    stroke(23, 20, 36);
+     fill(30, 25, 54);
+    rect(0, 300, 401,100);
+    fill(107, 104, 143);
+    rect(mouseX - 25, 300, 50, 10);
+    
+    //ball movement
+    ballX+=velX;
+    ballY+=velY;
+    
+    //collision with paddle
+    if(abs(ballX-mouseX)<= 40 && abs(300 - ballY) <=5)
+    {
+        velY*=-1;
+        velX=abs(velX)+xRand;
+        velX=velX*xNeg;
+        score++;
+    }
+    
+    //collision with walls
+if(ballX>= 400 || ballX <= 0)
+    {
+        xNeg*=-1;
+        velX=velX*xNeg;
+    }
+if(ballY<= 0)
+    {
+        velY*=-1;
+    }
+    
+    fill(206, 163, 255);
+    textSize(30);
+    text("score:" + score,249,388);
+};
+
+
 };
 
 if(currentScene === 1){
